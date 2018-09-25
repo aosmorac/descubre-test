@@ -1,0 +1,10 @@
+# From Pytho 3.6.1
+FROM python:3.6.1-alpine
+MAINTAINER Abel Moreno <moreno.abel@gmail.com>
+
+RUN apk update \
+    && apk add sqlite \
+	&& apk add socat \
+	&& apk add bash 
+
+RUN pip install requests

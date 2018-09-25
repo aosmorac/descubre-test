@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+  python:
+    build:
+      context: ./
+      dockerfile: python.docker
+    container_name: python-first
+    working_dir: /code
+    volumes:
+        - ./code:/code
+    tty: true
