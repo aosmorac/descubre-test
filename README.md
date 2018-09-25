@@ -16,9 +16,9 @@ cd descubre-test
 ```
 
 Run docker
-'''
+```
 docker-compose up
-'''
+```
 
 Go into docker container
 ```
