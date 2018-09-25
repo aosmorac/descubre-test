@@ -20,7 +20,7 @@ Run docker
 docker-compose up
 ```
 
-Go into docker container
+Go into docker container, using a different terminal
 ```
 docker exec -i -t python-first bash
 ```
