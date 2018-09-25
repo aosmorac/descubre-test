@@ -44,7 +44,7 @@ ls 179022.html
 179022.html
 ```
 ```
-./rebuild 6666666666 
+./render 6666666666 
 No category with ID: 6666666666
 ```
 
