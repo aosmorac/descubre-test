@@ -39,9 +39,9 @@ GetCategories API to download the category tree and
 
 output a file html that contains a simple web page displaying the sub categories list
 ```
-./render 179022 
-ls 179022.html
-179022.html
+./render 183627 
+ls 183627.html
+183627.html
 ```
 ```
 ./render 6666666666 
