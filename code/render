@@ -5,6 +5,8 @@ import sys
 from lib.Category import Category
 from lib.FileHandle import FileHandle
 
+sys.setrecursionlimit(10000);
+
 category_id = sys.argv[1];	
 
 catObj = Category();

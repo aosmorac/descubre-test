@@ -38,17 +38,25 @@ class Category:
 		c.execute('SELECT * FROM categories WHERE parent_id = ?', (parent_id,));
 		return c.fetchall();
 
+	def getCategoryChildrenHtml(self, category_id, max = 0):
+		categories = self.getCategoriesByParent(category_id); 
+		html = "";
+		if ( len(categories) > 0 ):
+			html += "<ul>"
+			for cat in categories: 
+				html += "<li>";
+				html += cat[1];
+				html += self.getCategoryChildrenHtml(cat[0], max+1);
+				html += "</li>";
+			html += "</ul>";
+		return html;
+
 	def detGetCategoryHtml(self, category_id):
 		category = self.getCategoriesById(category_id);
 		if category is not None: 
-			html = "<h1>"+category[1]+"</h1>";
-			html += "<ul>";
-			categories = self.getCategoriesByParent(category_id); 
-			for cat in categories: 
-				html += "<li>"+cat[1]+"</li>";
-			html += "</ul>";
+			html = "<h1>"+category[1]+" - "+str(category[2])+"</h1>";
+			html += self.getCategoryChildrenHtml(category_id);
 		else: 
 			html = "Error";
 		return html;
-
 
