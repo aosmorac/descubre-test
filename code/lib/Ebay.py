@@ -28,13 +28,18 @@ class Ebay:
         result = [];
 
         for child in categories:
-        	id = int(child.find('{urn:ebay:apis:eBLBaseComponents}CategoryID').text);
-        	categoryName = child.find('{urn:ebay:apis:eBLBaseComponents}CategoryName').text;
-        	categoryLevel = int(child.find('{urn:ebay:apis:eBLBaseComponents}CategoryLevel').text);
-        	categoryParentID = int(child.find('{urn:ebay:apis:eBLBaseComponents}CategoryParentID').text); 
-        	if categoryParentID == id: 
-        	    categoryParentID = 0 
-        	category = (id, categoryName, categoryLevel, categoryParentID)
-        	result.append(category);
-        
+            id = int(child.find('{urn:ebay:apis:eBLBaseComponents}CategoryID').text);
+            categoryName = child.find('{urn:ebay:apis:eBLBaseComponents}CategoryName').text;
+            categoryLevel = int(child.find('{urn:ebay:apis:eBLBaseComponents}CategoryLevel').text);
+            categoryParentID = int(child.find('{urn:ebay:apis:eBLBaseComponents}CategoryParentID').text); 
+            if categoryParentID == id: 
+                categoryParentID = 0; 
+            BestOfferEnabled = child.find('{urn:ebay:apis:eBLBaseComponents}BestOfferEnabled');
+            if BestOfferEnabled is None: 
+                categoryBestOfferEnabled = 0;
+            else:
+                categoryBestOfferEnabled = 1;
+            category = (id, categoryName, categoryLevel, categoryParentID, categoryBestOfferEnabled)
+            result.append(category);
+
         return (result);

@@ -31,13 +31,32 @@ If you want to run this code in your machine just go to code/ folder
 
 ## Sample Session
 
-GetCategories API to download the category tree and
-   create the SQLite database
+GetCategories API to download the category tree and create the SQLite database
+
+```
+./categories --rebuild
+```
+
+Or you can use
+
 ```
 ./rebuild
 ```
 
-output a file html that contains a simple web page displaying the sub categories list
+output a file html that contains a simple web page displaying the sub categories list 
+
+```
+./categories --render 183627 
+ls 183627.html
+183627.html
+```
+```
+./categories --render 6666666666 
+No category with ID: 6666666666
+```
+
+Or you can use
+
 ```
 ./render 183627 
 ls 183627.html

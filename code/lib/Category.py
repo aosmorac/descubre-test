@@ -10,7 +10,7 @@ class Category:
 
 	def createTable(self):
 		c = self.connection.cursor();
-		c.execute("CREATE TABLE categories (id real, name text, level real, parent_id real)");
+		c.execute("CREATE TABLE categories (id real, name text, level real, parent_id real, best_offer boolean)");
 		self.connection.commit();
 
 	def deleteTable(self):
@@ -20,7 +20,7 @@ class Category:
 
 	def store(self, categories):
 		c = self.connection.cursor();
-		c.executemany('INSERT INTO categories VALUES (?,?,?,?)', categories)
+		c.executemany('INSERT INTO categories VALUES (?,?,?,?,?)', categories)
 		self.connection.commit();
 
 	def getCategories(self):
@@ -45,16 +45,20 @@ class Category:
 			html += "<ul>"
 			for cat in categories: 
 				html += "<li>";
-				html += cat[1];
+				html += cat[1]+" - Level: "+str(cat[2]);
+				if cat[4] == 1: 
+					html += " - Best Offer Enabled"
 				html += self.getCategoryChildrenHtml(cat[0], max+1);
 				html += "</li>";
 			html += "</ul>";
 		return html;
 
-	def detGetCategoryHtml(self, category_id):
+	def getCategoryHtml(self, category_id):
 		category = self.getCategoriesById(category_id);
 		if category is not None: 
-			html = "<h1>"+category[1]+" - "+str(category[2])+"</h1>";
+			html = "<h1>"+category[1]+" - Level: "+str(category[2])+"</h1>";
+			if category[4] == 1:
+				html += "<p>Best Offer Enabled</p>"
 			html += self.getCategoryChildrenHtml(category_id);
 		else: 
 			html = "Error";

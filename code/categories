@@ -1,0 +1,47 @@
+#!/usr/bin/env python
+
+import sys
+
+from lib.Ebay import Ebay
+from lib.Category import Category
+from lib.FileHandle import FileHandle
+
+
+def rebuild():
+    categories = Ebay.getCategories();
+    catObj = Category();
+    catObj.deleteTable();
+    catObj.createTable();
+    catObj.store(categories);
+
+def render():
+    try:
+        category_id = sys.argv[2]; 
+    except IndexError:
+        category_id = -1;
+    if (category_id == -1):
+        print('Category ID is necessary');
+    else:
+        catObj = Category();
+        html =catObj.getCategoryHtml(category_id);
+        if html == 'Error':
+            print("No category with ID:"+category_id);
+        else:
+            FileHandle.saveFile(category_id+'.html', html);
+
+def testHelp():
+    print('No action, try --render or --rebuild');
+
+
+options = {
+            '--render' : render,
+            '--rebuild' : rebuild,
+            '--help' : testHelp,
+        }
+
+try:
+    action = sys.argv[1]; 
+except IndexError:
+    action = '--help';
+
+options[action]();

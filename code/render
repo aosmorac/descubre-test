@@ -11,7 +11,7 @@ category_id = sys.argv[1];
 
 catObj = Category();
 
-html =catObj.detGetCategoryHtml(category_id);
+html =catObj.getCategoryHtml(category_id);
 if html == 'Error':
 	print("No category with ID:"+category_id);
 else:
